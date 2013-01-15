@@ -3,7 +3,12 @@
 
     "name": "Instagrator",
     "description": "Integrate Instagram tags into Facebook",
-    "version": "0.2",
+    "version": "0.3",
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
     "options_page": "options.html",
 
     "background": {
@@ -20,7 +25,8 @@
 
     "page_action": {
         "default_icon": {
-            "19": "icon19.png"
+            "19": "icon19.png",
+            "38": "icon38.png"
         },
         "default_title": "Instagrator",
         "default_popup": "popup.html"
@@ -29,5 +35,7 @@
     "permissions": [
         "*://*.facebook.com/*",
         "webNavigation"
-    ]
+    ],
+
+    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
 }

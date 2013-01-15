@@ -1,5 +1,9 @@
 Changelog for Instagrator
 
+0.3
++ Added Google Analytics (must be enabled in the options)
++ New (temporary) logo
+
 0.2
 + Usernames now link to that profile on the Instagram website
 + Official Instagram posts now get tags/usernames linked

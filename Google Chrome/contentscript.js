@@ -4,7 +4,7 @@ chrome.extension.sendMessage({get: "options"}, function(response) {
     options = response;
 });
 
-function replaceHashtags() {
+function searchPage() {
     // Homepage and profiles
     $('.uiUnifiedStory, .timelineUnitContainer').each(function() {
         if (jQuery.parseJSON($(this).attr('data-gt'))) {
@@ -18,17 +18,7 @@ function replaceHashtags() {
                     post.html(function() {
                         // Change the HTML of the post
                         var text = post[0].innerHTML;
-                        text = text.replace(/(#\w+)/g, function(string) {
-                            // Replace hastags with a link to search for that hashtag
-                            string = string.replace('#', '');
-                            return '<a href="' + options.searchSite + string + '" target="' + options.target + '">#' + string + '</a>';
-                        });
-                        text = text.replace(/(@\w+)/g, function(string) {
-                            // Replace usernames with a link to that users Instagram page
-                            string = string.replace('@', '');
-                            return '<a href="http://www.instagram.com/' + string + '" target="' + options.target + '">@' + string + '</a>';
-                        });
-                        return text;
+                        return linkify(text);
                     });
                 }
             } else if ('creator' in json) {
@@ -38,17 +28,7 @@ function replaceHashtags() {
                     post.html(function() {
                         // Change the HTML of the post
                         var text = post[0].innerHTML;
-                        text = text.replace(/(#\w+)/g, function(string) {
-                            // Replace hastags with a link to search for that hashtag
-                            string = string.replace('#', '');
-                            return '<a href="' + options.searchSite + string + '" target="' + options.target + '">#' + string + '</a>';
-                        });
-                        text = text.replace(/(@\w+)/g, function(string) {
-                            // Replace usernames with a link to that users Instagram page
-                            string = string.replace('@', '');
-                            return '<a href="http://www.instagram.com/' + string + '" target="' + options.target + '">@' + string + '</a>';
-                        });
-                        return text;
+                        return linkify(text);
                     });
                 }
             }
@@ -68,17 +48,7 @@ function replaceHashtags() {
                     post.html(function() {
                         // Change the HTML of the post
                         var text = post[0].innerHTML;
-                        text = text.replace(/(#\w+)/g, function(string) {
-                            // Replace hastags with a link to search for that hashtag
-                            string = string.replace('#', '');
-                            return '<a href="' + options.searchSite + string + '" target="' + options.target + '">#' + string + '</a>';
-                        });
-                        text = text.replace(/(@\w+)/g, function(string) {
-                            // Replace usernames with a link to that users Instagram page
-                            string = string.replace('@', '');
-                            return '<a href="http://www.instagram.com/' + string + '" target="' + options.target + '">@' + string + '</a>';
-                        });
-                        return text;
+                        return linkify(text);
                     });
                 } else if ('creator' in json) {
                     if (json.creator == '162454007121996') {
@@ -87,17 +57,7 @@ function replaceHashtags() {
                         post.html(function() {
                             // Change the HTML of the post
                             var text = post[0].innerHTML;
-                            text = text.replace(/(#\w+)/g, function(string) {
-                                // Replace hastags with a link to search for that hashtag
-                                string = string.replace('#', '');
-                                return '<a href="' + options.searchSite + string + '" target="' + options.target + '">#' + string + '</a>';
-                            });
-                            text = text.replace(/(@\w+)/g, function(string) {
-                                // Replace usernames with a link to that users Instagram page
-                                string = string.replace('@', '');
-                                return '<a href="http://www.instagram.com/' + string + '" target="' + options.target + '">@' + string + '</a>';
-                            });
-                            return text;
+                            return linkify(text);
                         });
                     }
                 }
@@ -106,8 +66,26 @@ function replaceHashtags() {
     });
 }
 
+function linkify(text) {
+    text = text.replace(/(#\w+)/g, function(string) {
+        // Replace hastags with a link to search for that hashtag
+        chrome.extension.sendMessage({push: "analyticsEvent", event: string, text: 'linkified'}, function(response) {
+        });
+        string = string.replace('#', '');
+        return '<a href="' + options.searchSite + string + '" target="' + options.target + '">#' + string + '</a>';
+    });
+    text = text.replace(/(@\w+)/g, function(string) {
+        // Replace usernames with a link to that users Instagram page
+        chrome.extension.sendMessage({push: "analyticsEvent", event: string, text: 'linkified'}, function(response) {
+        });
+        string = string.replace('@', '');
+        return '<a href="http://www.instagram.com/' + string + '" target="' + options.target + '">@' + string + '</a>';
+    });
+    return text;
+}
+
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request == "replaceHashtags") {
-        replaceHashtags();
+    if (request == "searchPage") {
+        searchPage();
     }
 });

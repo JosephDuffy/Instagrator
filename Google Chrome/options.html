@@ -2,18 +2,19 @@
 <html>
   <head>
     <title>Options for Instagrator</title>
-    <link href="options.css" rel="stylesheet" type="text/css">
+    <script src="jquery.js"></script>
   </head>
   <body>
     <span id="status"></span><br>
-    <select id="searchSite">
+    <label>Search Site: <select id="searchSite">
         <option value="http://statigr.am/tag/">Statigr.am</option>
         <option value="http://web.stagram.com/keyword/">WebStagram</option>
-    </select><br>
-    <select id="target">
+    </select></label><br>
+    <label>Open In: <select id="target">
       <option value="_blank">New Tab</option>
       <option value="_self">Same Tab</option>
-    </select><br>
+    </select></label><br>
+    <label>Send anonymous data: <input type="checkbox" id="sendData"><br></label>
     <button id="save">Save Settings</button>
     <script src="options.js"></script>
   </body>

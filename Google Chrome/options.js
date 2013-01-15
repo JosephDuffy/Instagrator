@@ -8,6 +8,13 @@ function saveOptions() {
     var target = select.children[select.selectedIndex].value;
     localStorage["target"] = target;
 
+    var sendData = document.getElementById('sendData');
+    if (sendData.checked) {
+        localStorage['sendData'] = true;
+    } else {
+        localStorage['sendData'] = false;
+    }
+
     var status = document.getElementById("status");
     status.innerHTML = "Options Saved.";
     setTimeout(function() {
@@ -18,9 +25,6 @@ function saveOptions() {
 // Restores select box state to saved value from localStorage.
 function restoreOptions() {
     var searchSite = localStorage["searchSite"];
-    if (!searchSite) {
-        return;
-    }
     var select = document.getElementById("searchSite");
     for (var i = 0; i < select.children.length; i++) {
         var child = select.children[i];
@@ -31,9 +35,6 @@ function restoreOptions() {
     }
 
     var target = localStorage["target"];
-    if (!target) {
-        return;
-    }
     var select = document.getElementById("target");
     for (var i = 0; i < select.children.length; i++) {
         var child = select.children[i];
@@ -41,6 +42,12 @@ function restoreOptions() {
             child.selected = "true";
             break;
         }
+    }
+
+    var sendData = localStorage['sendData'];
+    if (sendData == 'true') {
+        console.log('Checking box');
+        $('#sendData').prop('checked', true);
     }
 }
 
