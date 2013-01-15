@@ -1,5 +1,8 @@
 Changelog for Instagrator
 
+0.3.1
+* Updated description
+
 0.3
 + Added Google Analytics (must be enabled in the options)
 + New (temporary) logo
