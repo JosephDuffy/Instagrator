@@ -1,5 +1,9 @@
 Changelog for Instagrator
 
+0.2
++ Usernames now link to that profile on the Instagram website
++ Official Instagram posts now get tags/usernames linked
+
 0.1.1
 + Page Action icon with a popup that contains a link to the options page
 + Hashtags are searched for and replaced when new stories are loaded

@@ -21,7 +21,32 @@ function replaceHashtags() {
                         text = text.replace(/(#\w+)/g, function(string) {
                             // Replace hastags with a link to search for that hashtag
                             string = string.replace('#', '');
-                            return "<a href=\"" + options.searchSite + "" + string + "\" target=\"" + options.target + "\">#" + string + "</a>";
+                            return '<a href="' + options.searchSite + string + '" target="' + options.target + '">#' + string + '</a>';
+                        });
+                        text = text.replace(/(@\w+)/g, function(string) {
+                            // Replace usernames with a link to that users Instagram page
+                            string = string.replace('@', '');
+                            return '<a href="http://www.instagram.com/' + string + '" target="' + options.target + '">@' + string + '</a>';
+                        });
+                        return text;
+                    });
+                }
+            } else if ('creator' in json) {
+                if (json.creator == '162454007121996') {
+                    // An post created by the Instagram page
+                    var post = $(this).find('.userContent');
+                    post.html(function() {
+                        // Change the HTML of the post
+                        var text = post[0].innerHTML;
+                        text = text.replace(/(#\w+)/g, function(string) {
+                            // Replace hastags with a link to search for that hashtag
+                            string = string.replace('#', '');
+                            return '<a href="' + options.searchSite + string + '" target="' + options.target + '">#' + string + '</a>';
+                        });
+                        text = text.replace(/(@\w+)/g, function(string) {
+                            // Replace usernames with a link to that users Instagram page
+                            string = string.replace('@', '');
+                            return '<a href="http://www.instagram.com/' + string + '" target="' + options.target + '">@' + string + '</a>';
                         });
                         return text;
                     });
@@ -46,10 +71,35 @@ function replaceHashtags() {
                         text = text.replace(/(#\w+)/g, function(string) {
                             // Replace hastags with a link to search for that hashtag
                             string = string.replace('#', '');
-                            return "<a href=\"" + options.searchSite + "" + string + "\" target=\"" + options.target + "\">#" + string + "</a>";
+                            return '<a href="' + options.searchSite + string + '" target="' + options.target + '">#' + string + '</a>';
+                        });
+                        text = text.replace(/(@\w+)/g, function(string) {
+                            // Replace usernames with a link to that users Instagram page
+                            string = string.replace('@', '');
+                            return '<a href="http://www.instagram.com/' + string + '" target="' + options.target + '">@' + string + '</a>';
                         });
                         return text;
                     });
+                } else if ('creator' in json) {
+                    if (json.creator == '162454007121996') {
+                        // An post created by the Instagram page
+                        var post = $(this).find('.userContent');
+                        post.html(function() {
+                            // Change the HTML of the post
+                            var text = post[0].innerHTML;
+                            text = text.replace(/(#\w+)/g, function(string) {
+                                // Replace hastags with a link to search for that hashtag
+                                string = string.replace('#', '');
+                                return '<a href="' + options.searchSite + string + '" target="' + options.target + '">#' + string + '</a>';
+                            });
+                            text = text.replace(/(@\w+)/g, function(string) {
+                                // Replace usernames with a link to that users Instagram page
+                                string = string.replace('@', '');
+                                return '<a href="http://www.instagram.com/' + string + '" target="' + options.target + '">@' + string + '</a>';
+                            });
+                            return text;
+                        });
+                    }
                 }
             }
         }
