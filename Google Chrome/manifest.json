@@ -1,26 +1,33 @@
 {
-  "manifest_version": 2,
+    "manifest_version": 2,
 
-  "name": "Instagrator",
-  "description": "Integrate Instagram tags into Facebook",
-  "version": "0.1",
-  "options_page": "options.html",
+    "name": "Instagrator",
+    "description": "Integrate Instagram tags into Facebook",
+    "version": "0.1.1",
+    "options_page": "options.html",
 
-  "background": {
-    "scripts":  ["background.js"]
-  },
+    "background": {
+        "scripts":  ["background.js"],
+        "persistent": false
+    },
 
-  "content_scripts": [
-    {
-        "matches": ["*://*.facebook.com/*"],
-        "js": ["jquery.js", "contentscript.js"]/*,
-        "run_at": "document_end"*/
-    }
-  ],
+    "content_scripts": [
+        {
+            "matches": ["*://*.facebook.com/*"],
+            "js": ["jquery.js", "contentscript.js"]
+        }
+    ],
 
-  "permissions": [
-    "*://*.facebook.com/*",
-    "webNavigation",
-    "tabs"
-  ]
+    "page_action": {
+        "default_icon": {
+            "19": "icon19.png"
+        },
+        "default_title": "Instagrator",
+        "default_popup": "popup.html"
+    },
+
+    "permissions": [
+        "*://*.facebook.com/*",
+        "webNavigation"
+    ]
 }

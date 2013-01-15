@@ -1,0 +1,8 @@
+Changelog for Instagrator
+
+0.1.1
++ Page Action icon with a popup that contains a link to the options page
++ Hashtags are searched for and replaced when new stories are loaded
+
+0.1
++ Initial Release
