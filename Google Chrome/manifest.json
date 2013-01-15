@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+
+  "name": "Instagrator",
+  "description": "Integrate Instagram tags into Facebook",
+  "version": "0.1",
+  "options_page": "options.html",
+
+  "background": {
+    "scripts":  ["background.js"]
+  },
+
+  "content_scripts": [
+    {
+        "matches": ["*://*.facebook.com/*"],
+        "js": ["jquery.js", "contentscript.js"]/*,
+        "run_at": "document_end"*/
+    }
+  ],
+
+  "permissions": [
+    "*://*.facebook.com/*",
+    "webNavigation",
+    "tabs"
+  ]
+}
