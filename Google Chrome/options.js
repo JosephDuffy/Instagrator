@@ -1,54 +1,59 @@
 // Saves options to localStorage.
+var storage = chrome.storage.local;
 function saveOptions() {
+    // Get each of the option
     var select = document.getElementById("searchSite");
     var searchSite = select.children[select.selectedIndex].value;
-    localStorage["searchSite"] = searchSite;
 
     var select = document.getElementById("target");
     var target = select.children[select.selectedIndex].value;
-    localStorage["target"] = target;
 
     var sendData = document.getElementById('sendData');
     if (sendData.checked) {
-        localStorage['sendData'] = true;
+        sendData = true;
     } else {
-        localStorage['sendData'] = false;
+        sendData = false;
     }
-
-    var status = document.getElementById("status");
-    status.innerHTML = "Options Saved.";
-    setTimeout(function() {
-        status.innerHTML = "";
-    }, 3000);
+    // Clear all saved options
+    storage.clear(function() {
+        // Storage has been cleared, save the options!
+        storage.set({'searchSite': searchSite, 'target': target, 'sendData': sendData}, function() {
+            var status = document.getElementById("status");
+            status.innerHTML = "Options Saved.";
+            setTimeout(function() {
+                status.innerHTML = "";
+            }, 3000);
+        });
+    });
 }
 
 // Restores select box state to saved value from localStorage.
 function restoreOptions() {
-    var searchSite = localStorage["searchSite"];
-    var select = document.getElementById("searchSite");
-    for (var i = 0; i < select.children.length; i++) {
-        var child = select.children[i];
-        if (child.value == searchSite) {
-            child.selected = "true";
-            break;
-        }
-    }
+    // Get all options stored
+    storage.get(null, function(options) {
 
-    var target = localStorage["target"];
-    var select = document.getElementById("target");
-    for (var i = 0; i < select.children.length; i++) {
-        var child = select.children[i];
-        if (child.value == target) {
-            child.selected = "true";
-            break;
+        var select = document.getElementById("searchSite");
+        for (var i = 0; i < select.children.length; i++) {
+            var child = select.children[i];
+            if (child.value == options.searchSite) {
+                child.selected = "true";
+                break;
+            }
         }
-    }
 
-    var sendData = localStorage['sendData'];
-    if (sendData == 'true') {
-        console.log('Checking box');
-        $('#sendData').prop('checked', true);
-    }
+        var select = document.getElementById("target");
+        for (var i = 0; i < select.children.length; i++) {
+            var child = select.children[i];
+            if (child.value == options.target) {
+                child.selected = "true";
+                break;
+            }
+        }
+
+        if (options.sendData) {
+            $('#sendData').prop('checked', true);
+        }
+    });
 }
 
 document.addEventListener('DOMContentLoaded', restoreOptions);

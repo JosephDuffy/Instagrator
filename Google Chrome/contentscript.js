@@ -1,7 +1,13 @@
 if (typeof options === 'undefined') {
     // Load options from local storage
-    chrome.extension.sendMessage({get: "options"}, function(response) {
-        options = response;
+    var storage = chrome.storage.local;
+    storage.get(null, function(reponse) {
+        options = reponse;
+        chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+            if (request == "searchPage") {
+                searchPage();
+            }
+        });
     });
 }
 
@@ -68,64 +74,7 @@ function searchPage() {
                 }
             }
         }
-        /*if (jQuery.parseJSON($(this).attr('data-gt'))) {
-            // Has a data-gt attribute
-            var json = jQuery.parseJSON($(this).attr('data-gt'));
-            if ('appid' in json || 'app_id' in json) {
-                // Has an appid
-                if (json.appid == "124024574287414" || json.app_id == "124024574287414") {
-                    // An Intagram post
-                    console.log('Found Instagram post');
-                    var post = $(this).find('.userContent');
-                    post.html(function() {
-                        // Change the HTML of the post
-                        var text = post[0].innerHTML;
-                        return linkify(text);
-                    });
-                }
-            } else if ('creator' in json) {
-                if (json.creator == '162454007121996') {
-                    // An post created by the Instagram page
-                    var post = $(this).find('.userContent');
-                    post.html(function() {
-                        // Change the HTML of the post
-                        var text = post[0].innerHTML;
-                        return linkify(text);
-                    });
-                }
-            } else if (jQuery.parseJSON($(this).attr('data-ft'))) {
-                // Used for facebook.com/username/activity/*
-                var json = jQuery.parseJSON($(this).attr('data-ft'));
-                if ('appid' in json || 'app_id' in json) {
-                    // Has an appid
-                    if (json.appid == "124024574287414" || json.app_id == "124024574287414") {
-                        // An Intagram post
-                        var post = $(this).find('.userContent');
-                        post.html(function() {
-                            // Change the HTML of the post
-                            var text = post[0].innerHTML;
-                            return linkify(text);
-                        });
-                    }
-                }
-            }
-        } else if (jQuery.parseJSON($(this).attr('data-ft'))) {
-            // Used for facebook.com/username/activity/*
-            var json = jQuery.parseJSON($(this).attr('data-ft'))
-            if ('appid' in json || 'app_id' in json) {
-                // Has an appid
-                if (json.appid == "124024574287414" || json.app_id == "124024574287414") {
-                    // An Intagram post
-                    var post = $(this).find('.userContent');
-                    post.html(function() {
-                        // Change the HTML of the post
-                        var text = post[0].innerHTML;
-                        return linkify(text);
-                    });
-                }
-            }
-        }
-*/    });
+    });
 }
 
 function linkify(text) {
@@ -147,9 +96,3 @@ function linkify(text) {
     });
     return text;
 }
-
-chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request == "searchPage") {
-        searchPage();
-    }
-});
