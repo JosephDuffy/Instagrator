@@ -1,5 +1,9 @@
 Changelog for Instagrator
 
+
+0.3.3
+* Updated logo
+
 0.3.2
 * More consistent detection of Instagram pictures and posts
 * Slight performance improvements
