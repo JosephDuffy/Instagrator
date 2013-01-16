@@ -13,34 +13,27 @@ _gaq.push(['_trackPageview']);
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.get == "options") {
-    	if (!localStorage['searchSite']) {
-			localStorage['searchSite'] = 'http://statigr.am/tag/';
-		}
-		if (!localStorage['target']) {
-			localStorage['target'] = '_blank';
-		}
-		if (!localStorage['sendData']) {
-			localStorage['sendData'] = false;
-		}
-        sendResponse({searchSite: localStorage['searchSite'], target: localStorage['target']});
-  	} else if (request.push == "analyticsEvent") {
-  		if (localStorage['sendData'] == 'true') {
-            _gaq.push(['_trackEvent', request.event, request.text]);
-        }
-  	} else {
-  		error.log('No settings were requested');
-  		sendResponse('Please request at least 1 setting');
-  	}
-});
-
 chrome.webNavigation.onCompleted.addListener(function(details) {
 	if (details.url.indexOf('facebook.com') > -1) {
+		/*console.log('Facebook URL: ' + details.url);
+		console.log('Facebook tabId: ' + details.tabId);*/
 		// URL is Facebook. Show the page action icon
 		chrome.pageAction.show(details.tabId);
 		// Replace hashtags on the current page
 		searchPage();
+	}
+});
+
+chrome.runtime.onInstalled.addListener(function(details) {
+	// Something has updated
+	console.log(details);
+	if (details.reason == 'install') {
+		// Extension was installed
+		console.log('Installed');
+		chrome.tabs.create({url: chrome.extension.getURL('install.html')});
+	} else if (details.reason == 'update') {
+		// Extension was updated
+		console.log('Updated: ' + details.previousVersion);
 	}
 });
 

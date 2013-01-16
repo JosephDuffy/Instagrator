@@ -31,7 +31,6 @@ function saveOptions() {
 function restoreOptions() {
     // Get all options stored
     storage.get(null, function(options) {
-
         var select = document.getElementById("searchSite");
         for (var i = 0; i < select.children.length; i++) {
             var child = select.children[i];

@@ -1,5 +1,8 @@
 Changelog for Instagrator
 
+0.4.1
++ Added install page
+
 0.4
 * Changed from local storage to the localStorage API. Should be faster and more reliable
 
