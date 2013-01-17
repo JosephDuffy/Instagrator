@@ -1,5 +1,12 @@
 Changelog for Instagrator
 
+0.5
++ Re-added Google Analytics (on by default)
+* Fixed no default setting being present
+* Data sent to Google Analytics is now shown in the console of the background page
+* Fix for websites that load Facebook assets being treated as Facebook.com
+
+
 0.4.1
 + Added install page
 

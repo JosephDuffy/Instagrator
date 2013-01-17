@@ -49,7 +49,7 @@ function restoreOptions() {
             }
         }
 
-        if (options.sendData) {
+        if (options.sendData != false) {
             $('#sendData').prop('checked', true);
         }
     });

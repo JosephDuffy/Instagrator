@@ -81,16 +81,14 @@ function linkify(text) {
     // Replace hastags
     text = text.replace(/(#\w+)/g, function(string) {
         // Replace hastags with a link to search for that hashtag
-        chrome.extension.sendMessage({push: "analyticsEvent", event: string, text: 'linkified'}, function(response) {
-        });
+        chrome.extension.sendMessage({push: "analyticsEvent", event: string, text: 'linkified'});
         string = string.replace('#', '');
         return '<a href="' + options.searchSite + string + '" target="' + options.target + '">#' + string + '</a>';
     });
     // Replace usernames
     text = text.replace(/(@\w+)/g, function(string) {
         // Replace usernames with a link to that users Instagram page
-        chrome.extension.sendMessage({push: "analyticsEvent", event: string, text: 'linkified'}, function(response) {
-        });
+        chrome.extension.sendMessage({push: "analyticsEvent", event: string, text: 'linkified'});
         string = string.replace('@', '');
         return '<a href="http://www.instagram.com/' + string + '" target="' + options.target + '">@' + string + '</a>';
     });
