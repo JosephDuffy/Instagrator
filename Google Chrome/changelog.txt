@@ -1,5 +1,8 @@
 Changelog for Instagrator
 
+0.5.3
+* Better handling of synced settings
+
 0.5.2
 * Fixed installer not saving to synced settings
 * Better handling when no settings have been saved
