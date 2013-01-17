@@ -1,5 +1,8 @@
 Changelog for Instagrator
 
+0.5.1
++ Settings are now synced across any Chrome browser you are logged into
+
 0.5
 + Re-added Google Analytics (on by default)
 * Fixed no default setting being present

@@ -15,7 +15,7 @@ _gaq.push(['_trackPageview']);
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.push == "analyticsEvent") {
-    	var storage = chrome.storage.local;
+    	var storage = chrome.storage.sync;
     	storage.get('sendData', function(options) {
 	  		if (options.sendData) {
 	  			console.log('Sending Google Analytics data with event "' + request.event + '" and text "' + request.text + '"');

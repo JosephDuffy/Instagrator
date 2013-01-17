@@ -1,6 +1,6 @@
 if (typeof options === 'undefined') {
     // Load options from local storage
-    var storage = chrome.storage.local;
+    var storage = chrome.storage.sync;
     storage.get(null, function(reponse) {
         options = reponse;
         chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {

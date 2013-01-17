@@ -1,5 +1,5 @@
 // Saves options to localStorage.
-var storage = chrome.storage.local;
+var storage = chrome.storage.sync;
 function saveOptions() {
     // Get each of the option
     var select = document.getElementById("searchSite");
@@ -19,7 +19,12 @@ function saveOptions() {
         // Storage has been cleared, save the options!
         storage.set({'searchSite': searchSite, 'target': target, 'sendData': sendData}, function() {
             var status = document.getElementById("status");
-            status.innerHTML = "Options Saved.";
+            if (chrome.runtime.lastError) {
+                console.log(chrome.runtime.lastError);
+                status.innerHTML = 'Error saving options. Please see console or try again.';
+            } else {
+                status.innerHTML = 'Options Saved.';
+            }
             setTimeout(function() {
                 status.innerHTML = "";
             }, 3000);
