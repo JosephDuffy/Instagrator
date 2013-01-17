@@ -3,7 +3,7 @@
 
     "name": "Instagrator",
     "description": "Integrate Instagram tags and usernames into Facebook by creating a link to search for that tag or view the user's profile",
-    "version": "0.5.1",
+    "version": "0.5.2",
     "icons": {
         "16": "icon16.png",
         "48": "icon48.png",

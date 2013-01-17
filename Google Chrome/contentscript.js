@@ -3,6 +3,15 @@ if (typeof options === 'undefined') {
     var storage = chrome.storage.sync;
     storage.get(null, function(reponse) {
         options = reponse;
+        if (typeof options.searchSite == 'undefined') {
+            storage.set({'searchSite': 'http://statigr.am/tag/'});
+        }
+        if (typeof options.target == 'undefined') {
+            storage.set({'target': '_blank'});
+        }
+        if (typeof options.searchSite == 'undefined') {
+            storage.set({'sendData': true});
+        }
         chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
             if (request == "searchPage") {
                 searchPage();

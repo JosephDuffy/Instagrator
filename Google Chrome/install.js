@@ -1,5 +1,5 @@
 // Saves options to localStorage.
-var storage = chrome.storage.local;
+var storage = chrome.storage.sync;
 
 function createDefault() {
     // Clear all saved options

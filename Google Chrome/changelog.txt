@@ -1,5 +1,9 @@
 Changelog for Instagrator
 
+0.5.2
+* Fixed installer not saving to synced settings
+* Better handling when no settings have been saved
+
 0.5.1
 + Settings are now synced across any Chrome browser you are logged into
 
@@ -8,7 +12,6 @@ Changelog for Instagrator
 * Fixed no default setting being present
 * Data sent to Google Analytics is now shown in the console of the background page
 * Fix for websites that load Facebook assets being treated as Facebook.com
-
 
 0.4.1
 + Added install page
