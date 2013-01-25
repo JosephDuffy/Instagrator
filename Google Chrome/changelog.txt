@@ -1,5 +1,8 @@
 Changelog for Instagrator
 
+1.0.1
+* Added link to privacy information
+
 1.0
 * First public release
 
